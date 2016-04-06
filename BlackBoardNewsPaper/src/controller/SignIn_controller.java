@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.DAO;
-import model.User.RegisterValidateService;
 import model.User.User;
+import service.RegisterValidateService;
 import tools.ServiceException;
 
 /**

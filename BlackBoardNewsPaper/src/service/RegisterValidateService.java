@@ -1,11 +1,12 @@
-package model.User;
+package service;
 
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import model.MD5Util;
-import model.SendEmail;
+import model.User.User;
+import model.User.UserDao;
+import tools.MD5Util;
 import tools.ServiceException;
 
 public class RegisterValidateService {

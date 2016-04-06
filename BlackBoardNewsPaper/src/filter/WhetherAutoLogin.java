@@ -14,7 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tools.LoginOutService;
+import service.LoginOutService;
 import tools.ServiceException;
 
 /**

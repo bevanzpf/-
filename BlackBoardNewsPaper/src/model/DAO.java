@@ -12,6 +12,8 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 import org.apache.commons.beanutils.BeanUtils;
 
 import model.User.User;
+import tools.JdbcUtil;
+import tools.ReflectUtil;
 
 public class DAO {
 	// INSERT UPDATE DELETE 操作都用这个方法

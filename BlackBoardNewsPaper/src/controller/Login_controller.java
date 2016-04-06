@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import tools.LoginOutService;
+import service.LoginOutService;
 import tools.ServiceException;
 
 /**

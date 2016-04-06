@@ -3,7 +3,7 @@ package model.User;
 import java.sql.Date;
 
 import model.DAO;
-import model.MD5Util;
+import tools.MD5Util;
 
 public class UserDao extends DAO{
 	public void add(String sql,Object...args)
