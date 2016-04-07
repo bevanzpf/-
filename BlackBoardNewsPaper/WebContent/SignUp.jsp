@@ -11,7 +11,7 @@
 <h4><%=request.getAttribute("message") %><a href="Login.jsp">请登录</a></h4>
 <%} %>
 <h2>注册</h2>
-<form action="SignIn_controller?action=register" method="post">
+<form action="SignUp_controller?action=register" method="post">
 Email:
 <input type="text" name="email"><br>
 Password:

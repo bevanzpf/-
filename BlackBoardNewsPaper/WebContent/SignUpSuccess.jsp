@@ -10,7 +10,7 @@
 <h3> 注册成功，请登录注册所用邮箱确认注册</h3>
 <br>
 
-<a href="SignIn_controller?action=reSendEmail&email=<%= request.getAttribute("email") %>"><button>重发邮件</button></a>
+<a href="SignUp_controller?action=reSendEmail&email=<%= request.getAttribute("email") %>"><button>重发邮件</button></a>
 
 </body>
 </html>

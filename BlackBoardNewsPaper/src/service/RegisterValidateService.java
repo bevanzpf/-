@@ -32,7 +32,7 @@ public class RegisterValidateService {
 		
 		StringBuffer sb = new StringBuffer("欢迎使用xxx,点击下面链接激活账号，"
 				+ "48小时生效，否则重新注册");
-		sb.append("<a href=\"http://localhost:8080/BlackBoardNewsPaper/SignIn_controller?action=activate&email=");
+		sb.append("<a href=\"http://localhost:8080/BlackBoardNewsPaper/SignUp_controller?action=activate&email=");
 		sb.append(email);
 		sb.append("&validateCode=");
 		String getValidateCode = "select validateCode from users where email = ?";
@@ -57,7 +57,7 @@ public class RegisterValidateService {
 		
 		StringBuffer sb = new StringBuffer("欢迎使用xxx,点击下面链接激活账号，"
 				+ "48小时生效，否则重新注册");
-		sb.append("<a href=\"http://localhost:8080/BlackBoardNewsPaper/SignIn_controller?action=activate&email=");
+		sb.append("<a href=\"http://localhost:8080/BlackBoardNewsPaper/SignUp_controller?action=activate&email=");
 		sb.append(email);
 		sb.append("&validateCode=");
 		

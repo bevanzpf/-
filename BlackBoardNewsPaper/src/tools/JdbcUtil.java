@@ -16,7 +16,7 @@ public class JdbcUtil {
 	{
 		String url = "jdbc:mysql://localhost:3306/�ڰ屨";
 		String user = "root";
-		String password = "bevanzpf123";
+		String password = "ygjjzh147569";
 		String driver = "com.mysql.jdbc.Driver";
 		Class.forName(driver);
 		

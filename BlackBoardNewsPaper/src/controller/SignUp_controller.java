@@ -17,14 +17,14 @@ import tools.ServiceException;
 /**
  * Servlet implementation class SignIn_controller
  */
-@WebServlet("/SignIn_controller")
-public class SignIn_controller extends HttpServlet {
+@WebServlet("/SignUp_controller")
+public class SignUp_controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignIn_controller() {
+    public SignUp_controller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,11 +44,11 @@ public class SignIn_controller extends HttpServlet {
 			} catch (ServiceException e) {
 				success = false;
 				request.setAttribute("message", e.getMessage());
-				request.getRequestDispatcher("/SignIn.jsp").forward(request, response);
+				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 			}
 			if(success){
 				request.setAttribute("email" , email); 
-				request.getRequestDispatcher("/SignInSuccess.jsp").forward(request, response);
+				request.getRequestDispatcher("/SignUpSuccess.jsp").forward(request, response);
 			}
 			
 //			response.sendRedirect("SignInSuccess.jsp");
@@ -70,7 +70,7 @@ public class SignIn_controller extends HttpServlet {
 			}catch(ServiceException e){
 				success = false;
 				request.setAttribute("message", e.getMessage());
-				request.getRequestDispatcher("/SignIn.jsp").forward(request, response);
+				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 			}
 			if(success){
 				request.setAttribute("message", "邮箱已激活，现在可以登录了");
