@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DAO;
 import model.User.User;
@@ -43,12 +44,16 @@ public class SignUp_controller extends HttpServlet {
 				registerService.processregister(email, password);
 			} catch (ServiceException e) {
 				success = false;
-				request.setAttribute("message", e.getMessage());
-				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+				request.getSession(true).setAttribute("message", e.getMessage());
+				response.sendRedirect("SignUp.jsp");
+//				request.setAttribute("message", e.getMessage());
+//				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 			}
 			if(success){
-				request.setAttribute("email" , email); 
-				request.getRequestDispatcher("/SignUpSuccess.jsp").forward(request, response);
+				request.getSession(true).setAttribute("email", email);
+				response.sendRedirect("SignUpSuccess.jsp");
+//				request.setAttribute("email" , email); 
+//				request.getRequestDispatcher("/SignUpSuccess.jsp").forward(request, response);
 			}
 			
 //			response.sendRedirect("SignInSuccess.jsp");
@@ -69,12 +74,16 @@ public class SignUp_controller extends HttpServlet {
 				}
 			}catch(ServiceException e){
 				success = false;
-				request.setAttribute("message", e.getMessage());
-				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+				request.getSession(true).setAttribute("message", e.getMessage());
+				response.sendRedirect("SignUp.jsp");
+//				request.setAttribute("message", e.getMessage());
+//				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 			}
 			if(success){
-				request.setAttribute("message", "邮箱已激活，现在可以登录了");
-				request.getRequestDispatcher("/Login.jsp").forward(request, response);//？？因为用了转发所以刷新后又回到SiginSevlvert
+				request.getSession(true).setAttribute("message", "邮箱已激活，现在可以登录了");
+				response.sendRedirect("Login.jsp");
+//				request.setAttribute("message", "邮箱已激活，现在可以登录了");
+//				request.getRequestDispatcher("/Login.jsp").forward(request, response);//？？因为用了转发所以刷新后又回到SiginSevlvert
 				//被上面的 catch捕获，转到 SignIn.jsp 不要转发有怎么带信息过去呢？？？ 细化exception？？？//用户不存在，链接过期，激活码不正确。
 				
 			}

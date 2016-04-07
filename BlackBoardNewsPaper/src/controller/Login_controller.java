@@ -55,8 +55,10 @@ public class Login_controller extends HttpServlet {
 			} catch (ServiceException e) {
 				System.out.println("logincontroller: 在loginService中验证出错");
 				seccess = false;
-				request.setAttribute("message", e.getMessage());
-				request.getRequestDispatcher("Login.jsp").forward(request, response);
+				request.getSession().setAttribute("message",e.getMessage());
+				response.sendRedirect("Login.jsp");
+//				request.setAttribute("message", e.getMessage());
+//				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
 			if(seccess){
 				if(keep.equals("1")){

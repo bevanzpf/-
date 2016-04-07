@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%if(request.getAttribute("message") !=null){ %>
-	<h4><%=request.getAttribute("message") %></h4>
+	<%if(session.getAttribute("message") !=null){ %>
+	<h6><%=session.getAttribute("message") %></h6>
+	<% session.removeAttribute("message"); %>
 	<%} %>
 	<h2>登录</h2>
 	<form action="Login_controller" method="post">

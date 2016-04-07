@@ -9,8 +9,9 @@
 <body>
 <h3> 注册成功，请登录注册所用邮箱确认注册</h3>
 <br>
-
-<a href="SignUp_controller?action=reSendEmail&email=<%= request.getAttribute("email") %>"><button>重发邮件</button></a>
-
+<% if(session.getAttribute("email") != null){ %>
+<a href="SignUp_controller?action=reSendEmail&email=<%= session.getAttribute("email").toString() %>"><button>重发邮件</button></a>
+<%session.removeAttribute("email");%>
+<%} %>
 </body>
 </html>

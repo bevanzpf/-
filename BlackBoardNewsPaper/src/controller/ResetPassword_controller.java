@@ -38,8 +38,10 @@ public class ResetPassword_controller extends HttpServlet {
 				service.sendResetEmail(email);
 			} catch (ServiceException e) {
 				success = false;
-				request.setAttribute("message", e.getMessage());
-				request.getRequestDispatcher("ResetPassword.jsp").forward(request,response); //打印错误信息
+				request.getSession().setAttribute("message", e.getMessage());
+				response.sendRedirect("ResetPassword.jsp");
+//				request.setAttribute("message", e.getMessage());
+//				request.getRequestDispatcher("ResetPassword.jsp").forward(request,response); //打印错误信息
 			}
 			if(success){
 				response.sendRedirect("SendResetSuccess.jsp");//显示已发邮件，跟重发邮件按钮// 直接在javascript 中提醒alter？？？

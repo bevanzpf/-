@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%if(request.getAttribute("message") !=null){ %>
-<h4><%=request.getAttribute("message") %><a href="Login.jsp">请登录</a></h4>
+<%if(session.getAttribute("message") !=null){ %>
+<h4><%=session.getAttribute("message").toString() %><a href="Login.jsp">请登录</a></h4>
+<% session.removeAttribute("message"); %>
 <%} %>
 <h2>注册</h2>
 <form action="SignUp_controller?action=register" method="post">

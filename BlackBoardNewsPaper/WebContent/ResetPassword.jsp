@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%if(request.getAttribute("message")!= null) {%>
-<h3><%= request.getAttribute("message") %></h3>
+<%if(session.getAttribute("message")!= null) {%>
+<h3><%= session.getAttribute("message") %></h3>
+<% session.removeAttribute("message"); %>
 <%} %>
 <form action="/BlackBoardNewsPaper/ResetPassword_controller?step=sendResetEmail" method ="post">
 	<h3>密码重置</h3>
