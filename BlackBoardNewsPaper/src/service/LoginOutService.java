@@ -15,16 +15,16 @@ public class LoginOutService {
 	 * @return
 	 * @throws ServiceException
 	 */
-	public int loginbypassword(String email,String password) throws ServiceException{
+	public User loginbypassword(String email,String password) throws ServiceException{
 		String password_digest = MD5Util.getMD5hash(password);
 		UserDao userdao = new UserDao();
-		String sql = "select id id ,password password,status status from users where email = ?";
+		String sql = "select id id ,email,email,password password,status status from users where email = ?";
 		User user = userdao.find(sql, email);
 		if(user != null){
 			System.out.println(user);
 			if(user.getStatus()!=0){
 				if(user.getPassword().equals(password_digest)){
-					return user.getId();
+					return user;
 				}else{
 					throw new ServiceException("密码错误");
 				}
@@ -56,14 +56,14 @@ public class LoginOutService {
 	 * @return
 	 * @throws ServiceException
 	 */
-	public String autoLogin(String email,String rememberToken) throws ServiceException{
+	public User autoLogin(String email,String rememberToken) throws ServiceException{
 		UserDao userdao = new UserDao();
 		String sql = "select email email,rememberDigest, rememberDigest from users where email = ?";
 		User user = userdao.find(sql, email);
 		String remember_digest = MD5Util.getMD5hash(rememberToken);
 		System.out.println(user);
 		if(user != null && user.getRememberDigest()!= null &&  user.getRememberDigest().equals(remember_digest)){
-			return user.getEmail();
+			return user;
 		}else{
 			throw new ServiceException("cookie无效"); //捕获到这个异常立即跳转到登录页面
 		}

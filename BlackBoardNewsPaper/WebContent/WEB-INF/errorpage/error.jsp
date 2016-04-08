@@ -9,10 +9,10 @@
 <body>
 <% String from_login = request.getParameter("from_login");//在welcome.jsp 转发时附加该属性。
 	if(from_login != null)
-		response.sendRedirect("/BlackBoardNewsPaper/lookOnlyLogin/Welcome.jsp");
+		response.sendRedirect("/BlackBoardNewsPaper/index.jsp");
 %>
 <h1>404页面</h1>
 <h4>抱歉，您访问的页面不存在！</h4><br>
-<h6><a href ="/BlackBoardNewsPaper/lookOnlyLogin/Welcome.jsp">返回欢迎页面</a></h6>
+<h6><a href ="/BlackBoardNewsPaper/index.jsp">返回欢迎页面</a></h6>
 </body>
 </html>

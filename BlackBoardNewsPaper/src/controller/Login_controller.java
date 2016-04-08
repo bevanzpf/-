@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.User.User;
 import service.LoginOutService;
 import tools.ServiceException;
 
@@ -36,6 +37,7 @@ public class Login_controller extends HttpServlet {
 		LoginOutService  service = new LoginOutService();
 		String action = request.getParameter("action");
 		String email = request.getParameter("email");
+		User user = null;
 		if(action != null && action.equals("logout")){
 			service.logOut(email);
 			HttpSession session = request.getSession();
@@ -47,10 +49,9 @@ public class Login_controller extends HttpServlet {
 			String password = request.getParameter("password");
 			String keep = request.getParameter("remember_me");
 			boolean seccess = true;
-			int userId = 0;
 			// 连接验证email password
 			try {
-				userId = service.loginbypassword(email, password);
+				user = service.loginbypassword(email, password);
 				System.out.println("logincontroller：在loginService中验证完成");
 			} catch (ServiceException e) {
 				System.out.println("logincontroller: 在loginService中验证出错");
@@ -75,8 +76,8 @@ public class Login_controller extends HttpServlet {
 					response.addCookie(remembercookie);
 				}
 				HttpSession session = request.getSession(true);
-				session.setAttribute("user", email); //在当前会话中设置user属性存一个userId 方便其他页面加载用户数据
-				response.sendRedirect("lookOnlyLogin/Welcome.jsp");
+				session.setAttribute("user", user); //把user 对象写入session
+				response.sendRedirect("index.jsp");
 			}
 		}
 	}

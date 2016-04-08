@@ -6,27 +6,52 @@ import java.util.Calendar;
 import model.DAO;
 
 public class User {
-		@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", status="
-				+ status + ", validateCode=" + validateCode + ", registerTime=" + registerTime + ", rememberDigest="
-				+ rememberDigest + "]";
+	private int id;
+	private String name;
+	private String password;
+	private String email;
+	private int status; //whether it is jihuo
+	private String validateCode;
+	private Date registerTime;
+	private String rememberDigest;
+	private String passwordValidateCode;
+	private Date resetTime;
+	private String school;
+	private String grade;
+	private String info;
+	
+	public String getSchool() {
+		return school;
 	}
 
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+		@Override
+		public String toString() {
+			return "User [name=" + name + ", email=" + email + "]";
+		}
 
 		public User(){
 			
 		}
-		private int id;
-		private String name;
-		private String password;
-		private String email;
-		private int status; //whether it is jihuo
-		private String validateCode;
-		private Date registerTime;
-		private String rememberDigest;
-		private String passwordValidateCode;
-		private Date resetTime;
 		
 		public String getPasswordValidateCode() {
 			return passwordValidateCode;
@@ -96,14 +121,6 @@ public class User {
 		public void setRegisterTime(Date registerTime) {
 			this.registerTime = registerTime;
 		}
-		
-		
-	
-//		@Override
-//		public String toString() {
-//			return "User [id=" + id + ", name=" + name + ", password=" + password + "]";
-//		}
-
 
 		public int getId() {
 			return id;
@@ -144,12 +161,5 @@ public class User {
 			c1.setTime(resetTime);
 			c1.add(Calendar.DATE, 2);
 			return c1.getTime();
-		}
-	
-	
-		public static void addUser(String name,String password){
-			DAO dao = new DAO();
-			String sql = "INSERT into users(name,password) values(?,?)";
-			dao.update(sql,name,password);
 		}
 }
