@@ -8,12 +8,16 @@
 </head>
 <body>
 <% User user =(User) session.getAttribute("user"); %>
+
+<% if (session.getAttribute("message")!= null){ %>
+	*error:<%=session.getAttribute("message") %>
+	<%session.removeAttribute("message");%>
+<%} %>
 <h3>你的信息：</h3>
 <form action="/BlackBoardNewsPaper/User_controller?action=updateProfile" method="post">
 昵称：
 <input type="text" value="<%=user.getName() %>" name="name"><br><br>
-Email:
-<input type="text" value="<%=user.getEmail()%>" name="email"><br><br>
+
 学校：
 <input type="text" value="<%=user.getSchool() %>" name="school"><br><br>
 年级：

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.User.User;
 import service.UserService;
+import tools.ServiceException;
 
 /**
  * Servlet implementation class User_controller
@@ -35,14 +36,21 @@ public class User_controller extends HttpServlet {
 		if(action.equals("updateProfile")){
 			System.out.println("user_controller 开始获取参数");
 			User user = (User)request.getSession().getAttribute("user");
-			user.setEmail(request.getParameter("email"));
-			user.setGrade(request.getParameter("grade"));
-			user.setSchool(request.getParameter("school"));
-			user.setName(request.getParameter("name"));
-			user.setInfo(request.getParameter("info"));
-			System.out.println(request.getParameter("info"));
-			service.updateProfile(user);
-			response.sendRedirect("a/user/index.jsp");
+			String name = request.getParameter("name");
+			String school = request.getParameter("school");
+			String grade = request.getParameter("grade");
+			String info = request.getParameter("info");
+			boolean success = true;
+			try {
+				service.updateProfile(user, name, school, grade, info);
+			} catch (ServiceException e) {
+				success = false;
+				request.getSession().setAttribute("message", e.getMessage());
+				response.sendRedirect("a/user/index.jsp");
+			}
+			if(success){
+				response.sendRedirect("a/user/index.jsp");
+			}
 		}
 		
 	}
