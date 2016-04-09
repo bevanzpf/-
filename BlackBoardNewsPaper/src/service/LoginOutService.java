@@ -58,7 +58,7 @@ public class LoginOutService {
 	 */
 	public User autoLogin(String email,String rememberToken) throws ServiceException{
 		UserDao userdao = new UserDao();
-		String sql = "select email email,rememberDigest rememberDigest,name name,school school,grade grade,info info from users where email = ?";
+		String sql = "select id id,email email,rememberDigest rememberDigest,name name,school school,grade grade,info info from users where email = ?";
 		User user = userdao.find(sql, email);
 		String remember_digest = MD5Util.getMD5hash(rememberToken);
 		System.out.println(user);

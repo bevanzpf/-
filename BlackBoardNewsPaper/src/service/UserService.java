@@ -13,6 +13,7 @@ public class UserService {
 		String name = user.getName();
 		String info = user.getInfo();
 		int id= user.getId();
+		System.out.println("userservice 开始更新id："+id+"的用户信息");
 		userdao.update(sql, email,school,grade,name,info,id);
 		
 	}

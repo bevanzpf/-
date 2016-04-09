@@ -29,15 +29,18 @@ public class User_controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		UserService service = new UserService();
 		if(action.equals("updateProfile")){
+			System.out.println("user_controller 开始获取参数");
 			User user = (User)request.getSession().getAttribute("user");
 			user.setEmail(request.getParameter("email"));
 			user.setGrade(request.getParameter("grade"));
 			user.setSchool(request.getParameter("school"));
 			user.setName(request.getParameter("name"));
 			user.setInfo(request.getParameter("info"));
+			System.out.println(request.getParameter("info"));
 			service.updateProfile(user);
 			response.sendRedirect("a/user/index.jsp");
 		}
