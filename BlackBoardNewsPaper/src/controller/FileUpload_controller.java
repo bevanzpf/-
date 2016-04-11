@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Request;
+
 import service.FileUploadService;
 
 /**
@@ -31,13 +33,18 @@ public class FileUpload_controller extends HttpServlet {
 		String action = request.getParameter("action");
 		FileUploadService service = new FileUploadService();
 		if(action.equals("uploadIcon")){
+			boolean success = true;
 			try {
 				service.proccessUploadIcon(request);
 			} catch (Exception e) {
+				e.printStackTrace();
+				success = false;
 				request.getSession().setAttribute("message", e.getMessage());
+				request.getRequestDispatcher("/a/user/index.jsp").forward(request, response);
+			}
+			if(success){
 				response.sendRedirect("/BlackBoardNewsPaper/a/user/index.jsp");
 			}
-//			response.sendRedirect("/BlackBoardNewsPaper/a/user/index.jsp");
 		}
 	}
 

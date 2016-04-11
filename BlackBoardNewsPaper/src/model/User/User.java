@@ -19,16 +19,16 @@ public class User {
 	private String school;
 	private String grade;
 	private String info;
-	private String iconURL;
+	private String icon;
 	
 	
 
-	public String getIconURL() {
-		return iconURL;
+	public String getIcon() {
+		return icon;
 	}
 
-	public void setIconURL(String icon) {
-		this.iconURL = icon;
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 	public String getSchool() {

@@ -18,7 +18,7 @@ public class LoginOutService {
 	public User loginbypassword(String email,String password) throws ServiceException{
 		String password_digest = MD5Util.getMD5hash(password);
 		UserDao userdao = new UserDao();
-		String sql = "select id id ,email,email,password password,status status,info info,grade grade,name name,school school from users where email = ?";
+		String sql = "select id id ,email,email,password password,status status,info info,grade grade,name name,school school,icon icon from users where email = ?";
 		User user = userdao.find(sql, email);
 		if(user != null){
 			System.out.println(user);
@@ -58,7 +58,7 @@ public class LoginOutService {
 	 */
 	public User autoLogin(String email,String rememberToken) throws ServiceException{
 		UserDao userdao = new UserDao();
-		String sql = "select id id,email email,rememberDigest rememberDigest,name name,school school,grade grade,info info from users where email = ?";
+		String sql = "select id id,email email,rememberDigest rememberDigest,name name,school school,grade grade,info info,icon icon from users where email = ?";
 		User user = userdao.find(sql, email);
 		String remember_digest = MD5Util.getMD5hash(rememberToken);
 		System.out.println(user);

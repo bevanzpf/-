@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<% String root = request.getContextPath(); %>
 <% User user =(User) session.getAttribute("user"); %>
 
 <% if (session.getAttribute("message")!= null){ %>
@@ -14,8 +15,9 @@
 	<%session.removeAttribute("message");%>
 <%} %>
 <h3>你的信息：</h3>
+<img alt="" src="<%=root%>/upload/icon/<%=user.getIcon() %>" height="70" width="70">
 <form action="/BlackBoardNewsPaper/FileUpload_controller?action=uploadIcon" enctype="multipart/form-data" method ="post">
-<input type="file" name="iconURL">
+<input type="file" name="icon">
 <input type="submit" value ="提交">
 </form>
 <form action="/BlackBoardNewsPaper/User_controller?action=updateProfile" method="post">
