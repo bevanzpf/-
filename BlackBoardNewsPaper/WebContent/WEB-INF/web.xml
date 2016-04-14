@@ -33,6 +33,15 @@
     <servlet-name>userIndex</servlet-name>
     <url-pattern>/a/user/index.jsp</url-pattern>
   </servlet-mapping>
+  <!-- upload page -->
+  <servlet>
+    <servlet-name>upload</servlet-name>
+    <jsp-file>/lookOnlyLogin/user/upload.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>upload</servlet-name>
+    <url-pattern>/a/user/upload</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>404</error-code>
     <location>/WEB-INF/errorpage/error.jsp</location>

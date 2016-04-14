@@ -62,7 +62,7 @@ public class Login_controller extends HttpServlet {
 //				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			}
 			if(seccess){
-				if(keep.equals("1")){
+				if(keep != null &&keep.equals("1")){
 					
 					System.out.println("logincontroller:¿ªÊ¼Ð´Èëcookie");
 	//				 new Cookie(name, URLEncoder.encode(value, "UTF-8"));

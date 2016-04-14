@@ -46,6 +46,21 @@ public class FileUpload_controller extends HttpServlet {
 				response.sendRedirect("/BlackBoardNewsPaper/a/user/index.jsp");
 			}
 		}
+		if(action.equals("uploadWork")){
+			boolean success = true;
+			try {
+				service.processUploadWork(request);
+			} catch (Exception e) {
+				e.printStackTrace();
+				success = false;
+				request.getSession().setAttribute("message", e.getMessage());
+				response.sendRedirect("/BlackBoardNewsPaper/a/user/upload");
+			}
+			if(success){
+				request.getSession().setAttribute("message", "上传成功");
+				response.sendRedirect("/BlackBoardNewsPaper/a/user/upload");
+			}
+		}
 	}
 
 	/**

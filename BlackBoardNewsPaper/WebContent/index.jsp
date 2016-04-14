@@ -19,6 +19,7 @@
 <% if(user != null) {%>
 <span><a href="<%=root%>/a/user/index.jsp">我的质料</a></span>
 <span><a href="<%=root%>/Login_controller?action=logout&email=<%=user.getEmail()%>">注销登陆</a></span>
+<a herf="<%=root%>/a/user/upload">上传</a>
 <%} else{%>
 <span><a href="<%=root %>/Login.jsp">登录</a></span>
 <Span><a href="<%=root %>/SignUp.jsp">注册</a></Span>

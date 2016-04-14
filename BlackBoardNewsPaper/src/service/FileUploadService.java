@@ -1,6 +1,8 @@
 package service;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,6 +18,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import model.User.User;
 import model.User.UserDao;
+import model.work.Work;
+import model.work.WorkDao;
 import tools.FileUtil;
 import tools.MD5Util;
 import tools.RandomUtil;
@@ -54,7 +58,42 @@ public class FileUploadService {
 		UserDao userdao = new UserDao();
 		userdao.update(savaIcon, icon,id);
 	}
-
+	
+	
+public void processUploadWork(HttpServletRequest request) throws Exception{
+	request.setCharacterEncoding("UTF-8");
+	String file = "/upload/works";
+	String  REAL_UPLOAD_PATH = request.getSession().getServletContext().getRealPath(file);
+	ServletFileUpload upload = getUpload(request);
+	List<String> typeRange = Arrays.asList("jpg","gif","png","bmp","tiff");
+	Work work = new Work();
+	
+	List<FileItem> items = upload.parseRequest(request);
+	Map<String,FileItem> pathItemMap =  new HashMap<>();
+	buildPathItemMapAndBean(items,pathItemMap,work,REAL_UPLOAD_PATH);
+	// validateType
+	validateType(work.getFileName(),typeRange);
+	//upload
+	upload(pathItemMap);
+	
+	//更新数据库
+	User user = (User)request.getSession().getAttribute("user");
+	int userId = user.getId();
+	//userId subject info date fileName
+	String subject = work.getSubject();
+	String info = work.getInfo();
+	Date date = new Date(new java.util.Date().getTime());
+	String fileName = work.getFileName();
+	String SaveWork = "INSERT into works(userId,subject,info,date,fileName) values(?,?,?,?,?)";
+	WorkDao workdao = new WorkDao();
+	workdao.update(SaveWork, userId,subject,info,date,fileName);
+	
+}
+private void validateType(String fileName,List<String> range) throws ServiceException{
+	String ext = fileName.substring(fileName.indexOf(".")+1);
+	if(!range.contains(ext))
+		throw new ServiceException("文件类型出错");
+}
 
 	
 
@@ -63,15 +102,16 @@ public class FileUploadService {
 			String file = map.getKey();
 			FileItem item  = map.getValue();
 			File uploadeFile = new File(file);
+			System.out.println("文件正上传到："+file);
 			item.write(uploadeFile);
 		}
 	}
 
-	private void buildPathItemMapAndBean(List<FileItem> items, Map<String,FileItem> map,Object object,String path) throws ServiceException{ 
+	private void buildPathItemMapAndBean(List<FileItem> items, Map<String,FileItem> map,Object object,String path) throws ServiceException, UnsupportedEncodingException{ 
 		for(FileItem item :items){
 			if (item.isFormField()) {
 		        String fieldName = item.getFieldName();//fieldName 与 bean 中的属性名对应
-		        String fieldValue = item.getString();
+		        String fieldValue = item.getString("UTF-8");
 		        ReflectUtil.setFieldValue(object, fieldName, fieldValue);//在bean对象中 记录作品属性（如描述，主题）.方便后续存入数据库。
 		    } else {
 		    	String fieldName = item.getFieldName(); //fieldName 与 bean 中的属性名对应
@@ -83,7 +123,7 @@ public class FileUploadService {
 		    	String extName = fileName.substring(fileName.indexOf("."));
 		    	String radomFileName = MD5Util.getMD5hash(RandomUtil.random(11));  
 		    	String Realpath = path+"\\"+radomFileName+extName;
-		    	String savedPath = Realpath.substring(Realpath.indexOf("\\icon\\")+6);
+		    	String savedPath = Realpath.substring(Realpath.indexOf("\\upload\\")+8);///worK上传时要改变？？？？？？
 		    	System.out.println("存入绝对路径："+Realpath);   
 		    	
 		    	ReflectUtil.setFieldValue(object, fieldName ,savedPath);//在bean对象中 记录作品属性及其对应的路径.方便后续存入数据库。
@@ -104,7 +144,7 @@ public class FileUploadService {
 
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
-
+		upload.setHeaderEncoding("UTF-8");
 		// Set overall request size constraint
 		upload.setSizeMax(1024*1024*1024);  //56 行代替方案，虽然有点那啥。。。
 		return upload;
